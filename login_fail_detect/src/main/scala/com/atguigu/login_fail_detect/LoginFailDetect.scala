@@ -10,7 +10,6 @@ import org.apache.flink.util.Collector
 
 import scala.collection.mutable.ListBuffer
 
-
 object LoginFailDetect {
 
   def main(args: Array[String]): Unit = {
@@ -19,6 +18,7 @@ object LoginFailDetect {
 
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
     env.setParallelism(1)
+
 
     val loginEventStream = env.fromCollection(List(
       LoginEvent(1, "192.168.0.1", "fail", 1558430842),
@@ -34,11 +34,10 @@ object LoginFailDetect {
 
     env.execute()
 
-
   }
 
-  class MyKeyedProcessFunction extends KeyedProcessFunction[Long,LoginEvent,LoginEvent] {
 
+  class MyKeyedProcessFunction extends KeyedProcessFunction[Long,LoginEvent,LoginEvent] {
 
     lazy val failState:ListState[LoginEvent] =
       getRuntimeContext.getListState(new ListStateDescriptor[LoginEvent]("failState",classOf[LoginEvent]))
@@ -51,8 +50,8 @@ object LoginFailDetect {
 
     }
 
-    override def onTimer(timestamp: Long, ctx: KeyedProcessFunction[Long, LoginEvent, LoginEvent]#OnTimerContext, out: Collector[LoginEvent]): Unit = {
 
+    override def onTimer(timestamp: Long, ctx: KeyedProcessFunction[Long, LoginEvent, LoginEvent]#OnTimerContext, out: Collector[LoginEvent]): Unit = {
 
       val allogin = new ListBuffer[LoginEvent]
 
@@ -66,7 +65,6 @@ object LoginFailDetect {
       if(allogin.length >1)
 
         out.collect(allogin.head)
-
 
     }
 

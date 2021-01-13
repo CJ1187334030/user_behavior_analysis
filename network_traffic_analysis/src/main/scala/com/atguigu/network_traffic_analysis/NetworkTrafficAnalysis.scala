@@ -2,7 +2,6 @@ package com.atguigu.network_traffic_analysis
 
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
-import java.util.Date
 
 import com.atguigu.network_traffic_analysis.bean.{ApacheLogEvent, UrlViewCount}
 import org.apache.flink.api.common.functions.AggregateFunction
