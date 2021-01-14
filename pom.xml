@@ -12,6 +12,7 @@
         <module>hot_item_analysis</module>
         <module>network_traffic_analysis</module>
         <module>login_fail_detect</module>
+        <module>order_timeout_detect</module>
     </modules>
 
 

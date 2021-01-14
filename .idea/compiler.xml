@@ -9,6 +9,7 @@
         <module name="hot_item_analysis" />
         <module name="login_fail_detect" />
         <module name="network_traffic_analysis" />
+        <module name="order_timeout_detect" />
       </profile>
     </annotationProcessing>
   </component>
